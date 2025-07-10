@@ -1,29 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPowers : MonoBehaviour
 {
-    public float maxJumpForce = 70.0f;          //  How long the player can jump
-    public float jumpForceIncrement = 0.2f;     //  How fast the player can load the jump power
-    public float maxPunchForce = 100.0f;        //  How strong the player cna punch
-    public float punchForceIncrement = 0.3f;    //  How fast the player load the punch power
+    [SerializeField]
+    private float maxJumpForce = 70.0f;          //  How long the player can jump
+    [SerializeField]
+    private float jumpForceIncrement = 0.2f;     //  How fast the player can load the jump power
+    [SerializeField]
+    private float maxPunchForce = 100.0f;        //  How strong the player cna punch
+    [SerializeField]
+    private float punchForceIncrement = 0.3f;    //  How fast the player load the punch power
 
-    [HideInInspector]
-    public bool isCharging;                     //  Controls whether the player is charging a power
+    public bool isCharging { get; set; }                     //  Controls whether the player is charging a power
 
     //  Variables
-    float m_CurrentJumpForce;
-    float m_CurrentPunchForce;
-    bool isCharged;
-    bool punchSkill;
-    bool jumpSkill;
+    private float m_CurrentJumpForce;
+    private float m_CurrentPunchForce;
+    private bool isCharged;
+    private bool punchSkill;
+    private bool jumpSkill;
 
     //  Components
-    PlayerMovement movement;
-    Animator m_Animator;
-    CharacterController controller;
-    PunchPhysics punch;
+    private PlayerMovement movement;
+    private Animator m_Animator;
+    private CharacterController controller;
+    private PunchPhysics punch;
 
     private void Start()
     {
@@ -74,9 +75,9 @@ public class PlayerPowers : MonoBehaviour
         }
     }
 
-    void ChargePunchPower()
+    private void ChargePunchPower()
     {
-        if(m_CurrentPunchForce >= maxPunchForce)
+        if (m_CurrentPunchForce >= maxPunchForce)
         {
             //  Punch
             m_Animator.SetFloat("PunchPower", 1);
@@ -118,9 +119,9 @@ public class PlayerPowers : MonoBehaviour
         }
     }
 
-    void ChargeJumpPower()
+    private void ChargeJumpPower()
     {
-        if(m_CurrentJumpForce >= maxJumpForce)
+        if (m_CurrentJumpForce >= maxJumpForce)
         {
             //  Jump
             m_Animator.SetFloat("JumpPower", 1);
@@ -136,10 +137,10 @@ public class PlayerPowers : MonoBehaviour
         }
     }
 
-    void CancelPowers()
+    private void CancelPowers()
     {
         //  Make all the variables to default value
-        movement.JumpPower(movement.jumpForce);
+        movement.JumpPower(movement.JumpForce);
         m_CurrentJumpForce = 0;
         m_CurrentPunchForce = 0;
         isCharging = false;
@@ -149,7 +150,7 @@ public class PlayerPowers : MonoBehaviour
         jumpSkill = false;
     }
 
-    void PunchForce()
+    private void PunchForce()
     {
         //  Apply the force of the punch collision
         punch.CollisionForce(transform.forward);

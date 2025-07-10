@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LavaPlatform : MonoBehaviour
 {
-    [HideInInspector]
-    public bool isWorking;          //  Control if the platform is busy
+    public bool isWorking { get; set; }          //  Control if the platform is busy
 
-    Material m_PlatforMaterial;     //  Material fo the object
+    private Material m_PlatforMaterial;     //  Material fo the object
 
     private void Start()
     {

@@ -1,21 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyableObject : MonoBehaviour
 {
-    public float health = 100.0f;                   //  Maximum health of the object
-    public bool canHealPerTime = true;              //  If the object can heal over time
-    public float damageEffectIntesity = 2.0f;       //  Intensity of effect when the player damages the enemy
-    public float damageEffectDuration = 0.1f;       //  Duration of the effect
-    public GameObject destroyEffect;                //  Effect when the object is destroyed
+    [SerializeField]
+    private float health = 100.0f;                   //  Maximum health of the object
+    [SerializeField]
+    private bool canHealPerTime = true;              //  If the object can heal over time
+    [SerializeField]
+    private float damageEffectIntesity = 2.0f;       //  Intensity of effect when the player damages the enemy
+    [SerializeField]
+    private float damageEffectDuration = 0.1f;       //  Duration of the effect
+    [SerializeField]
+    private GameObject destroyEffect;                //  Effect when the object is destroyed
 
-    Material m_ObjectMaterial;          //  Material of the object
-    Color m_Color;                      //  Default color of the object, it's required to make the damage effect
-    //  Variables
-    float m_CurrentHealth;
-    float m_Intensity;
-    float m_DamageEffectTimer;
+    private Material m_ObjectMaterial;          //  Material of the object
+    private Color m_Color;                      //  Default color of the object, it's required to make the damage effect
+    private float m_CurrentHealth;
+    private float m_Intensity;
+    private float m_DamageEffectTimer;
 
     private void Start()
     {
@@ -64,7 +67,7 @@ public class DestroyableObject : MonoBehaviour
         }
     }
 
-    void DestroyObject()
+    private void DestroyObject()
     {
         //  Destroy the object and play the particle effect
         Destroy(gameObject);
@@ -73,7 +76,7 @@ public class DestroyableObject : MonoBehaviour
         StartCoroutine(DestroyParticle(effect));
     }
 
-    IEnumerator DestroyParticle(GameObject effect)
+    private IEnumerator DestroyParticle(GameObject effect)
     {
         yield return new WaitForSeconds(effect.GetComponent<ParticleSystem>().main.duration);
         Destroy(effect);

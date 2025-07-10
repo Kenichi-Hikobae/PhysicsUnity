@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class ShowTutorial : MonoBehaviour
 {
-    public GameObject tutorialUI;
-    public string title;
-    public string description;
+    [SerializeField]
+    private GameObject tutorialUI;
+    [SerializeField]
+    private string title;
+    [SerializeField]
+    private string description;
 
-    TutorialUI UI;
+    private TutorialUI UI;
 
     private void Start()
     {
         UI = tutorialUI.GetComponent<TutorialUI>();
         tutorialUI.SetActive(false);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         tutorialUI.SetActive(true);

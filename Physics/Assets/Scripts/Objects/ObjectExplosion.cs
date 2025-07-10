@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectExplosion : MonoBehaviour
 {
-    public float cubeSize = 0.2f;
-    public int cubesInRow = 3;
+    [SerializeField]
+    private float cubeSize = 0.2f;
+    [SerializeField]
+    private int cubesInRow = 3;
+    [SerializeField]
+    private float explosionForce = 50f;
+    [SerializeField]
+    private float explosionRadius = 4f;
+    [SerializeField]
+    private float explosionUpward = 0.4f;
 
-    float cubesPivotDistance;
-    Vector3 cubesPivot;
+    private float cubesPivotDistance;
+    private Vector3 cubesPivot;
 
-    public float explosionForce = 50f;
-    public float explosionRadius = 4f;
-    public float explosionUpward = 0.4f;
-
-    void Start()
+    private void Start()
     {
         //calculate pivot distance
         cubesPivotDistance = cubeSize * cubesInRow / 2;
@@ -26,12 +28,11 @@ public class ObjectExplosion : MonoBehaviour
     {
         if (hit.gameObject.name == "Player")
         {
-            Debug.Log("asdasd");
-            explode();
+            Explode();
         }
     }
 
-    public void explode()
+    public void Explode()
     {
         //make object disappear
         gameObject.SetActive(false);
@@ -43,7 +44,7 @@ public class ObjectExplosion : MonoBehaviour
             {
                 for (int z = 0; z < cubesInRow; z++)
                 {
-                    createPiece(x, y, z);
+                    CreatePiece(x, y, z);
                 }
             }
         }
@@ -65,7 +66,7 @@ public class ObjectExplosion : MonoBehaviour
         }
     }
 
-    void createPiece(int x, int y, int z)
+    private void CreatePiece(int x, int y, int z)
     {
         //create piece
         GameObject piece;

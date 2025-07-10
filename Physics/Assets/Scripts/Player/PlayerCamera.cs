@@ -1,34 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
-using Cinemachine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public CinemachineVirtualCamera movementCamera;
-    public Transform cameraLookAt;                  //  Target which the camer will look at and follow
-    public Transform cameraTarget;                  //  Target that moves with the player and the camera follows the position
-    public AxisState xAxis;
-    public AxisState yAxis;
+    [SerializeField]
+    private CinemachineCamera movementCamera;
+    [SerializeField]
+    private Transform cameraLookAt; //  Target which the camer will look at and follow
+    [SerializeField]
+    private Transform cameraTarget; //  Target that moves with the player and the camera follows the position
+
+    [SerializeField]
+    private float xSensitivity = 300f;
+    [SerializeField]
+    private float ySensitivity = 200f;
+    [SerializeField]
+    private float minY = -80f;
+    [SerializeField]
+    private float maxY = 80f;
+
+    private float xAxis;
+    private float yAxis;
+    private float currentX = 0f;
+    private float currentY = 0f;
 
     PlayerPowers powers;
-    
+
     private void Start()
     {
         //  Lock and hide the cursor
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         //  Get the powers component
         powers = GetComponent<PlayerPowers>();
     }
 
     private void FixedUpdate()
     {
-        //  Every frame get the mouse x and y input
-        xAxis.Update(Time.fixedDeltaTime);
-        yAxis.Update(Time.fixedDeltaTime);
-        //  Follow the target object rotation
-        cameraLookAt.transform.rotation = Quaternion.Euler(yAxis.Value, xAxis.Value, 0f);
+        xAxis = Input.GetAxis("Mouse X");
+        yAxis = Input.GetAxis("Mouse Y");
+
+        currentX += xAxis * xSensitivity * Time.fixedDeltaTime;
+        currentY -= yAxis * ySensitivity * Time.fixedDeltaTime;
+        currentY = Mathf.Clamp(currentY, minY, maxY);
+
+        // Apply rotation to the camera look-at target
+        cameraLookAt.rotation = Quaternion.Euler(currentY, currentX, 0f);
     }
 
     private void Update()

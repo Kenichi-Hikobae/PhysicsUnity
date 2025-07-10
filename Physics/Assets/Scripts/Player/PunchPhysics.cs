@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PunchPhysics : MonoBehaviour
 {
-    public float forceApply = 30.0f;        //  Force of the punch
-    public float punchDamage = 50.0f;       //  Damage of the punch
+    [SerializeField]
+    private float forceApply = 30.0f;        //  Force of the punch
+    [SerializeField]
+    private float punchDamage = 50.0f;       //  Damage of the punch
 
     //  Variables
-    bool isCollision;           //  Check if the object can react to collision
-    Vector3 directionForce;
+    private bool isCollision;           //  Check if the object can react to collision
+    private Vector3 directionForce;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -35,7 +35,7 @@ public class PunchPhysics : MonoBehaviour
         Invoke("ResetPunch", 0.5f);
     }
 
-    void ResetPunch()
+    private void ResetPunch()
     {
         //  Reset the collision if after a timer the punch did not collide with something
         isCollision = false;

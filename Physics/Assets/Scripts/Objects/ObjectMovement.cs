@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectMovement : MonoBehaviour
 {
-    public float speed = 5.0f;      //  Speed of the player
-    public float jumpForce = 10.0f; //  Force of the jump
+    [SerializeField]
+    private float speed = 5.0f;      //  Speed of the player
+    [SerializeField]
+    private float jumpForce = 10.0f; //  Force of the jump
 
-    Rigidbody m_Rigidbody;
-    Vector3 m_MovementInput;
-    Vector3 m_PlayerMovement;
+    private Rigidbody m_Rigidbody;
+    private Vector3 m_MovementInput;
+    private Vector3 m_PlayerMovement;
 
     private void Start()
     {

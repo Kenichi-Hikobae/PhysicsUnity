@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class PlarformMovement : MonoBehaviour
 {
-    public Vector3[] movement;              //  Array of the movement of the platform, without the current position
-    public Vector3 rotation;                //  Vector of the rotation of the platform
-    public float speedMovement = 10.0f;     //  Speed of the platform
-    public float waitTime = 1.0f;           //  Time to wait for each waypoint
+    [SerializeField]
+    private Vector3[] movement;     //  Array of the movement of the platform, without the current position
+    [SerializeField]
+    private Vector3 rotation;       //  Vector of the rotation of the platform
+    [SerializeField]
+    private float speedMovement = 10.0f;    //  Speed of the platform
+    [SerializeField]
+    private float waitTime = 1.0f;  //  Time to wait for each waypoint
+    [SerializeField]
+    private bool canMove = true;
+    [SerializeField]
+    private bool canRotate = false;
 
-    public bool canMove = true;
-    public bool canRotate = false;
-
-    int currentDestination;                 //  Current destination of the platform
-    Rigidbody m_Rigidbody;
-
-    Vector3[] waypoints;                    //  All the waypoints of the platform movement
+    private int currentDestination; //  Current destination of the platform
+    private Rigidbody m_Rigidbody;
+    private Vector3[] waypoints;    //  All the waypoints of the platform movement
 
     private void Start()
     {

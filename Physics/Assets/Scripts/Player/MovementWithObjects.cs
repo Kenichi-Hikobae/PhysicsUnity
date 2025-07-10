@@ -1,22 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementWithObjects : MonoBehaviour
 {
-    public LayerMask obstaculesMask;        //  Mask of the obstacules in the scene
+    [SerializeField]
+    private LayerMask obstaculesMask;        //  Mask of the obstacules in the scene
 
-    CharacterController controller;         //  CharacterController of the player
+    private CharacterController controller;     //  CharacterController of the player
     //  Variables
-    Vector3 m_GroundPosition;               //  Current position on the ground
-    Vector3 m_LastGroundPosition;           //  Last position on the ground
-    string m_GroundName;
-    string m_LastGroundName;
+    private Vector3 m_GroundPosition;           //  Current position on the ground
+    private Vector3 m_LastGroundPosition;       //  Last position on the ground
+    private string m_GroundName;
+    private string m_LastGroundName;
 
-    Quaternion m_CurrentRotation;           //  Current rotation on the ground
-    Quaternion m_LastRotation;              //  Last rotation on the ground
+    private Quaternion m_CurrentRotation;       //  Current rotation on the ground
+    private Quaternion m_LastRotation;          //  Last rotation on the ground
 
-    Vector3 m_SpherCastPosition;            //  Position of the sphere cast (Higher than the origin of the player)
+    private Vector3 m_SpherCastPosition;        //  Position of the sphere cast (Higher than the origin of the player)
 
     private void Start()
     {
@@ -31,14 +30,14 @@ public class MovementWithObjects : MonoBehaviour
         Movement();
     }
 
-    void Movement()
+    private void Movement()
     {
         if (controller.isGrounded)
         {
             //  Raycast information
             RaycastHit hit;
             //  Make a Sphere cast to know what is under the player
-            if(Physics.SphereCast(transform.position + m_SpherCastPosition, controller.height / 4, -transform.up, out hit, 5, obstaculesMask))
+            if (Physics.SphereCast(transform.position + m_SpherCastPosition, controller.height / 4, -transform.up, out hit, 5, obstaculesMask))
             {
                 //  Create a new gameobject with the hit information of the cast
                 GameObject ground = hit.collider.gameObject;
@@ -54,7 +53,7 @@ public class MovementWithObjects : MonoBehaviour
                     transform.position += m_GroundPosition - m_LastGroundPosition;
                 }
 
-                if(m_CurrentRotation != m_LastRotation && m_GroundName == m_LastGroundName)
+                if (m_CurrentRotation != m_LastRotation && m_GroundName == m_LastGroundName)
                 {
                     //  Rotate the object base on the gound movement
                     var rotation = transform.rotation * (m_CurrentRotation.eulerAngles - m_LastRotation.eulerAngles);

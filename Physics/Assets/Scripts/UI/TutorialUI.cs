@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 public class TutorialUI : MonoBehaviour
 {
-    public Text titleTutorial;
-    public Text descriptionTutorial;
+    [SerializeField]
+    private Text titleTutorial;
+    [SerializeField]
+    private Text descriptionTutorial;
 
     public void ShowTutorial(string title, string description)
     {
