@@ -18,6 +18,14 @@ Hold LeftClick -> Punch
 
 ----------------------------------
 You can find different ways to deal with Unity3D physics and object movement as well as the movement of the main character and his camera in third person.
+
+Demo: https://youtu.be/YE84Lxff4AQ
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/31c66e85-5f9d-4119-a886-77b8516fb1e8" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/5465ea3b-bb71-4ce0-b340-58169a067b78" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ed9f8394-94cb-4799-913b-2265c2e769cb" />
+<img width="1917" height="1079" alt="image" src="https://github.com/user-attachments/assets/9c8d63c0-2814-47ce-bee3-098f7b647df4" />
+
 ----------------------------------
 Software:
 Unity version: 2020.2.1f1
